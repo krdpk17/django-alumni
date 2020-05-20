@@ -13,8 +13,11 @@ class UserProfile(models.Model):
     location = models.CharField(max_length=50, blank=True)
     birth_date = models.DateField()
     passout_year = models.IntegerField(('year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    course = models.CharField( max_length = 20
-        ) 
+    course = models.CharField( max_length = 20)
+    linkedin_url = models.URLField(blank=True)
+    facebook_url = models.URLField(blank=True)
+    twitter_url = models.URLField(blank=True)
+    website_url = models.URLField(blank=True) 
     def __str__(self):
         return self.user.username 
 
