@@ -6236,3 +6236,4 @@ env/lib/python3.7/site-packages/wrapt/importer.py
 env/lib/python3.7/site-packages/wrapt/wrappers.py
 env/pyvenv.cfg
 alumnisystem/accounts/migrations/0001_initial.py
+alumnisystem/accounts/migrations/0002_auto_20200520_1046.py

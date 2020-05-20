@@ -68,6 +68,6 @@ class SignUp(generic.CreateView):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('home:index')
+                    return redirect('update')
                     
         return render(request, self.template_name, context)
