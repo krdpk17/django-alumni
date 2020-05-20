@@ -11,8 +11,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=50, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
-    passout_year = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    birth_date = models.DateField()
+    passout_year = models.IntegerField(('year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     course = models.CharField( max_length = 20
         ) 
     def __str__(self):

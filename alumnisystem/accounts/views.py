@@ -8,7 +8,7 @@ from django.contrib import messages
 from .forms import SignUpForm, UserProfileForm, EditUserProfileForm, ProfileChangeForm
 
 class UpdateProfile(UpdateView):
-    success_url = reverse_lazy('tweetfetch:index')
+    success_url = reverse_lazy('update')
     template_name = 'account_update.html'
     form_class = ProfileChangeForm
     form_profile = EditUserProfileForm
@@ -27,7 +27,7 @@ class UpdateProfile(UpdateView):
             form.save()
             profile_form.save()
             messages.success(request, 'Form submission successful')
-            return redirect('home:index')
+            return redirect('update')
                 
         return render(request, self.template_name, context)
 

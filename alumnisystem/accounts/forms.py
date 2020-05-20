@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from .models import UserProfile
+from django.urls import reverse_lazy
 import datetime
 
 COURSE_CHOICES = [
@@ -93,8 +94,8 @@ class EditUserProfileForm(forms.ModelForm):
     """
     class Meta:
         model = UserProfile
-        fields = ('bio', 'location', 'birth_date', 
-            'course','passout_year')
+        success_url = reverse_lazy('update')
+        exclude = ['user', 'course', 'birth_date', 'passout_year']
 
     def __init__(self, *args, **kwargs):
         super(EditUserProfileForm, self).__init__(*args, **kwargs)
