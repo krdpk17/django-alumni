@@ -3,6 +3,44 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from .models import UserProfile
 
+COURSE_CHOICES = [
+    ('UG', (
+            ('UG1', 'B-MATH'),
+            ('UG2', 'B-STAT'),
+        )
+    ),
+    ('PG', (
+            ('PG1', 'M-MATH'),
+            ('PG2', 'M-STAT'),
+            ('PG6', 'MTech-CS'),
+            ('PG7', 'MTech-CRS'),
+            ('PG8', 'MTech-QROR'),
+            ('PG3', 'MS-QE'),
+            ('PG4', 'MS-LIS'),
+            ('PG5', 'MS-QMS')
+        )
+    ),
+    ('PHD', (
+            ('PHD1', 'Stats'),
+            ('PHD2', 'Maths'),
+            ('PHD3', 'QE'),
+            ('PHD4', 'CS'),
+            ('PHD5', 'QROR'),
+            ('PHD6', 'Physics'),
+            ('PHD7', 'Geology'),
+            ('PHD8', 'Bilogy'),
+            ('PHD9', 'LIS')
+        )
+    ),
+    ('Diploma', (
+            ('D1', 'PGDBA'),
+            ('D2', 'Stats'),
+            ('D3', 'Computers')
+        )
+    ),
+    ('unknown', 'Unknown'),
+]
+
 '''
 Section for signup data
 '''
@@ -16,10 +54,22 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')            
 
 class UserProfileForm(forms.ModelForm):
+    course = forms.MultipleChoiceField(choices = COURSE_CHOICES)
+    
     class Meta:
         model = UserProfile
-        fields = ('bio', 'location', 'birth_date', 
-            'course', 'department', 'passout_year', 'college_name')
+        exclude = ['user']
+
+    def clean_course(self):
+        courses = self.cleaned_data['course']
+        if not courses:
+            raise forms.ValidationError("...")
+
+        if len(courses) > 2:
+            raise forms.ValidationError("...")
+
+        courses = ' '.join(courses)
+        return courses
 
 
 '''
@@ -40,7 +90,7 @@ class EditUserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('bio', 'location', 'birth_date', 
-            'course', 'department', 'passout_year', 'college_name')
+            'course','passout_year')
 
     def __init__(self, *args, **kwargs):
         super(EditUserProfileForm, self).__init__(*args, **kwargs)
