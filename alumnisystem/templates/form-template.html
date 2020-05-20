@@ -1,0 +1,23 @@
+{% if form %}
+    {% for field in form %}
+        <div class="form-group">
+            <div class="col-sm-offset-2 cp;-sm-10">
+                <span class="text-danger small">{{field.errors}}</span>
+            </div>
+            <label class="control-label col-sm-2"> {{field.label_tag}} </label>
+            <div class="col-sm-10"> {{field}} </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if profile_form %}
+  {% for field in profile_form %}
+    <div class="form-group">
+        <div class="col-sm-offset-2 cp;-sm-10">
+            <span class="text-danger small">{{field.errors}}</span>
+        </div>
+        <label class="control-label col-sm-2"> {{field.label_tag}} </label>
+        <div class="col-sm-10"> {{field}} </div>
+    </div>
+    {% endfor %}  
+{% endif %}
