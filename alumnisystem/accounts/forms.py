@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from .models import UserProfile
+import datetime
 
 COURSE_CHOICES = [
     ('UG', (
@@ -54,7 +55,10 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')            
 
 class UserProfileForm(forms.ModelForm):
+    cur_year = datetime.datetime.today().year
+    year_range = tuple([i for i in range(cur_year - 90, cur_year - 20)])
     course = forms.MultipleChoiceField(choices = COURSE_CHOICES)
+    birth_date = forms.DateField(initial=datetime.date.today() - datetime.timedelta(days=365*30),widget=forms.SelectDateWidget(years=year_range))
     
     class Meta:
         model = UserProfile
