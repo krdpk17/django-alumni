@@ -1,2 +1,3 @@
 django
 django-login-required-middleware
+django-widget-tweaks
