@@ -21,6 +21,7 @@ from boards import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
+    url(r'^boards/(?P<pk>\d+)/$', views.board_topics, name='board_topics'),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')), # new
     path('accounts/', include('django.contrib.auth.urls')), # new
