@@ -8,7 +8,7 @@ from django.contrib import messages
 from .forms import SignUpForm, UserProfileForm, EditUserProfileForm, ProfileChangeForm
 
 class UpdateProfile(UpdateView):
-    success_url = reverse_lazy('update')
+    success_url = reverse_lazy('/')
     template_name = 'account_update.html'
     form_class = ProfileChangeForm
     form_profile = EditUserProfileForm
@@ -68,6 +68,6 @@ class SignUp(generic.CreateView):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('update')
+                    return redirect('/')
                     
         return render(request, self.template_name, context)
