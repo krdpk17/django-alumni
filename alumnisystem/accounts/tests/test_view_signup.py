@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.urls import resolve
 from django.contrib.auth.forms import UserCreationForm
 
-from .forms import UserProfileForm
+from ..forms import UserProfileForm
 
 import pdb
 
