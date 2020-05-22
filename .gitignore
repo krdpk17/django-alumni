@@ -6241,3 +6241,4 @@ alumnisystem/accounts/migrations/0002_auto_20200520_1046.py
 alumnisystem/accounts/migrations/0003_auto_20200520_2311.py
 alumnisystem/boards/migrations/__init__.py
 alumnisystem/boards/migrations/0001_initial.py
+alumnisystem/accounts/migrations/0004_userprofile_github_url.py

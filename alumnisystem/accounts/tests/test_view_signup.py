@@ -42,11 +42,11 @@ class SignUpTests(TestCase):
         The view must contain five inputs: csrf, username, email,
         password1, password2
         '''
-        self.assertContains(self.response, '<input', 12)
+        self.assertContains(self.response, '<input', 13)
         self.assertContains(self.response, 'type="text"', 4)
         self.assertContains(self.response, 'type="email"', 1)
         self.assertContains(self.response, 'type="password"', 2)
-        self.assertContains(self.response, 'type="url"', 4)
+        self.assertContains(self.response, 'type="url"', 5)
 
 class SuccessfulSignUpTests(TestCase):
     def setUp(self):

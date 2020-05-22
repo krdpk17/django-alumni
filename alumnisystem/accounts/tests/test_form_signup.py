@@ -8,7 +8,7 @@ class SignUpFormTest(TestCase):
         profile_form = UserProfileForm()
         form_expected = ['username', 'first_name', 'last_name','email', 'password1', 'password2']
         profile_form_expected = ['bio', 'location', 'birth_date', 'passout_year', 'course', 
-                                    'linkedin_url', 'facebook_url', 'twitter_url', 'website_url']
+                                    'linkedin_url', 'facebook_url', 'twitter_url', 'github_url', 'website_url']
         form_actual = list(form.fields)
         profile_form_actual = list(profile_form.fields)
         self.assertSequenceEqual(form_expected, form_actual)

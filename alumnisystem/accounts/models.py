@@ -17,6 +17,7 @@ class UserProfile(models.Model):
     linkedin_url = models.URLField(blank=True)
     facebook_url = models.URLField(blank=True)
     twitter_url = models.URLField(blank=True)
+    github_url = models.URLField(blank=True)
     website_url = models.URLField(blank=True) 
     def __str__(self):
         return self.user.username 
