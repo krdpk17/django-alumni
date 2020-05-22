@@ -6,6 +6,7 @@ from ..views import home, board_topics
 from ..models import Board, Topic, Post
 from ..forms import NewTopicForm
 
+import pdb
 
 class BoardTopicsTests(TestCase):
     def setUp(self):
@@ -34,9 +35,4 @@ class BoardTopicsTests(TestCase):
         
         self.assertContains(response, 'href="{0}"'.format(homepage_url))
         self.assertContains(response, 'href="{0}"'.format(new_topic_url))
-    
-    def test_new_topic_view_contains_link_back_to_board_topics_view(self):
-        new_topic_url = reverse('new_topic', kwargs={'pk': 1})
-        board_topics_url = reverse('board_topics', kwargs={'pk': 1})
-        response = self.client.get(new_topic_url)
-        self.assertContains(response, 'href="{0}"'.format(board_topics_url))
+
