@@ -28,6 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')), # new
     path('accounts/', include('django.contrib.auth.urls')), # new
+    
+    url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/reply/$', views.reply_topic, name='reply_topic'),
 
     url(r'^reset/$',
         auth_views.PasswordResetView.as_view(
