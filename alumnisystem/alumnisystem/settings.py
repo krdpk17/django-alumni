@@ -37,11 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts.apps.AccountsConfig', # new
+    # 'accounts.apps.AccountsConfig', # new
     #'boards.apps.BoardsConfig', # newboards', #new
     
     'widget_tweaks',
 
+    'accounts',
     'boards',
 ]
 
