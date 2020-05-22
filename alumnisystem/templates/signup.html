@@ -1,29 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'board_base.html' %}
 {% block title %}Register{% endblock title %}
 
-{% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12 col-md-7">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3> {% block heading %} Create a New Account{% endblock heading  %} </h3>
-                    {% if error_message %}
-                        <p><strong> {{ error_message }} </strong></p>
-                    {% endif %}
-                    <form class="form-horizontal" action="" method="post">
-                        {% csrf_token %}
-                        {% include 'form-template.html' %}
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 cp;-sm-10">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock content %}
+{% block body %}
+  <div class="container">
+    <h2>Sign up</h2>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% include 'includes/form.html' with form=form  %}
+      {% include 'includes/form.html' with form=profile_form %}
+      <button type="submit" class="btn btn-primary">Create an account</button>
+    </form>
+  </div>
+{% endblock %}
