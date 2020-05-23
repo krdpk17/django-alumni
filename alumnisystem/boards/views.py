@@ -6,11 +6,15 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.views.generic import UpdateView
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 
 from .forms import NewTopicForm, PostForm
 from .models import Board, Topic, Post
 
 
+import pdb
+
+@method_decorator(login_required, name='dispatch')
 class PostUpdateView(UpdateView):
     model = Post
     fields = ('message', )
@@ -25,6 +29,9 @@ class PostUpdateView(UpdateView):
         post.save()
         return redirect('topic_posts', pk=post.topic.board.pk, topic_pk=post.topic.pk)
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(created_by=self.request.user)    
 
 def home(request):
     boards = Board.objects.all()
