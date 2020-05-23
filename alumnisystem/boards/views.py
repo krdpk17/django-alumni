@@ -3,6 +3,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 
 from .forms import NewTopicForm, PostForm
 from .models import Board, Topic, Post
@@ -12,11 +13,9 @@ def home(request):
     return render(request, 'home.html', {'boards': boards})
 
 def board_topics(request, pk):
-    try:
-        board = Board.objects.get(pk=pk)
-    except Board.DoesNotExist:
-        raise Http404
-    return render(request, 'topics.html', {'board': board})
+    board = get_object_or_404(Board, pk=pk)
+    topics = board.topics.order_by('-last_updated').annotate(replies=Count('posts') - 1)
+    return render(request, 'topics.html', {'board': board, 'topics': topics})
 
 @login_required
 def new_topic(request, pk):
