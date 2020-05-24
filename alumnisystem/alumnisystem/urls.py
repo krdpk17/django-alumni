@@ -56,5 +56,5 @@ urlpatterns = [
         views.PostUpdateView.as_view(), name='edit_post'),
         
     #Activity stream
-    url('^activity/', include('actstream.urls')),
+    url('^activity/', include('actstream.urls'), name='activity'),
 ]
