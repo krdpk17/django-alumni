@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from actstream import action
+from actstream.models import any_stream, user_stream, actor_stream, action_object_stream, target_stream
 
 from .forms import NewTopicForm, PostForm
 from .models import Board, Topic, Post
@@ -29,6 +30,8 @@ class PostUpdateView(UpdateView):
         post.updated_by = self.request.user
         post.updated_at = timezone.now()
         post.save()
+        action.send(self.request.user, verb='edited reply as', action_object=post, target=post.topic)
+
         return redirect('topic_posts', pk=post.topic.board.pk, topic_pk=post.topic.pk)
 
     def get_queryset(self):
@@ -71,6 +74,10 @@ def new_topic(request, pk):
                 topic=topic,
                 created_by = request.user
             )
+            action.send(request.user, verb='started new topic as ', action_object=topic, target=board)
+            action.send(topic, verb='created by user', action_object=request.user, target=board)
+            action.send(board, verb='got new topic as', action_object=topic)            
+
             return redirect('topic_posts', pk=pk, topic_pk=topic.pk)
     else:
         form = NewTopicForm()
@@ -118,7 +125,8 @@ def reply_topic(request, pk, topic_pk):
                 page=topic.get_page_count()
             )
             #Code to send activity notification
-            action.send(request.user, verb='replied as', action_object=post, target=topic)
+            action.send(request.user, verb='replied as', action_object=post, url=topic_url, target=topic)
+            action.send(topic, verb='got reply as ', action_object=post, target=topic)
             return redirect(topic_post_url)
     else:
         form = PostForm()
