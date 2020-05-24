@@ -2,3 +2,4 @@ django
 django-login-required-middleware
 django-widget-tweaks
 markdown
+django-activity-stream

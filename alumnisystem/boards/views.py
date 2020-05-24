@@ -8,6 +8,7 @@ from django.views.generic import UpdateView, ListView
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from actstream import action
 
 from .forms import NewTopicForm, PostForm
 from .models import Board, Topic, Post
@@ -116,7 +117,8 @@ def reply_topic(request, pk, topic_pk):
                 id=post.pk,
                 page=topic.get_page_count()
             )
-
+            #Code to send activity notification
+            action.send(request.user, verb='replied as', action_object=post, target=topic)
             return redirect(topic_post_url)
     else:
         form = PostForm()

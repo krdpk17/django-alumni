@@ -54,4 +54,7 @@ urlpatterns = [
         
     url(r'^boards/(?P<pk>\d+)/topics/(?P<topic_pk>\d+)/posts/(?P<post_pk>\d+)/edit/$',
         views.PostUpdateView.as_view(), name='edit_post'),
+        
+    #Activity stream
+    url('^activity/', include('actstream.urls')),
 ]

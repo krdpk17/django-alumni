@@ -40,12 +40,24 @@ INSTALLED_APPS = [
     'django.contrib.humanize', # new
     # 'accounts.apps.AccountsConfig', # new
     #'boards.apps.BoardsConfig', # newboards', #new
+    'django.contrib.sites',
+    'actstream',
     
     'widget_tweaks',
 
     'accounts',
     'boards',
+    'activitymonitor',
+    
 ]
+
+SITE_ID = 1
+
+ACTSTREAM_SETTINGS = {
+    #'MANAGER': 'boards.managers.MyActionManager',
+    'FETCH_RELATIONS': True,
+    'USE_JSONFIELD': False,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
