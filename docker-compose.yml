@@ -14,7 +14,7 @@ services:
     image: django-alumnisystem
     environment:
       - DJANGO_ALLOWED_HOSTS='*'
-    command: bash -c "ls && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "gunicorn wsgi:application --bind 0.0.0.0:8000"
     ports:
       - "8458:8000"
     depends_on:

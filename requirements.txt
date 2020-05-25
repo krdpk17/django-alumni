@@ -1,7 +1,9 @@
+gunicorn
 psycopg2
 django
 django-login-required-middleware
 django-widget-tweaks
 markdown
 django-activity-stream
+dj-static
 git+https://github.com/justquick/django-activity-stream.git#egg=actstream

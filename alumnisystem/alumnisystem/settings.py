@@ -42,13 +42,11 @@ INSTALLED_APPS = [
     #'boards.apps.BoardsConfig', # newboards', #new
     'django.contrib.sites',
     'actstream',
-    
     'widget_tweaks',
 
     'accounts',
     'boards',
     'activitymonitor',
-    
 ]
 
 SITE_ID = 1
@@ -100,15 +98,15 @@ WSGI_APPLICATION = 'alumnisystem.wsgi.application'
 #     }
 # }
 
-DATABASES = {                                                                      
-    'default': {                                                                   
-        'ENGINE': 'django.db.backends.postgresql',                                 
-        'NAME': 'postgres',                                                        
-        'USER': 'postgres',                                                        
-        'PASSWORD': 'postgres',                                                    
-        'HOST': 'db',                                                              
-        'PORT': 5432,                                                              
-    }                                                                              
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
+    }
 }
 
 # Password validation
@@ -147,6 +145,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
