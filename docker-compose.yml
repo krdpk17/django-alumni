@@ -1,0 +1,31 @@
+version: '3'
+  
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    image: django-alumnisystem
+    command: bash -c "ls && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8458:8000"
+    depends_on:
+      - db
+  migration:
+    image: django-alumnisystem
+    command: bash -c "python manage.py migrate && python manage.py migrate --run-syncdb"
+    depends_on:
+      - db
+      - web
+  createsuperuser:
+    image: django-alumnisystem
+    command: ./manage.py shell -c "from django.contrib.auth.models import User; User.objects.create_superuser('${DUSER}', 'admin@example.com', '${DPASS}')"
+
+    depends_on:
+      - db
+      - web
+      - migration
